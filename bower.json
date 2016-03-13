@@ -1,0 +1,31 @@
+{
+  "name": "visualdiff",
+  "version": "0.0.0",
+  "authors": [
+    "Carles Escrig Royo <esroyo@gmail.com>"
+  ],
+  "description": "Visual diff tool service",
+  "main": "visualdiff.py",
+  "keywords": [
+    "zurb",
+    "foundation",
+    "visual",
+    "diff",
+    "tool",
+    "twentytwenty",
+    "jquery"
+  ],
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.5.3",
+    "jquery.event.move": "https://github.com/stephband/jquery.event.move.git#1.3.6",
+    "twentytwenty": "https://github.com/zurb/twentytwenty.git"
+  }
+}

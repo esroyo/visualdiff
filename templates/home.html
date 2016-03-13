@@ -1,0 +1,112 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en"{% if not usage %} class="diff"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <title>Visual Diff tool</title>
+    <link rel="stylesheet" href="{% static 'site.css' %}" type="text/css">
+{% if usage %}
+    <link rel="stylesheet" href="{% static 'vendor/foundation/css/normalize.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'vendor/foundation/css/foundation.min.css' %}" type="text/css">
+{% endif %}
+    <link rel="stylesheet" href="{% static 'vendor/twentytwenty/css/twentytwenty.css' %}" type="text/css">
+</head>
+<body>
+{% if usage %}
+	<div class="row">
+		<div class="large-12 columns">
+			<h1>Visual Diff Tool
+			<small>with TwentyTwenty</small>
+			</h1>
+			<hr />
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-12 columns" role="content">
+    	<p>This server can be used for serving visual diffs of two images using
+    	<a href="http://zurb.com/playground/twentytwenty" target="_blank">Zurb's TwentyTwenty</a>.</p>
+    	<p>To request the diff of any given two images
+    	simply add a <strong>before</strong> and an <strong>after</strong>
+    	parameter to this URL pointing to the image sources such as:</p>
+    	<pre class="panel code">{{ example }}<strong>?before=</strong>http://placehold.it/400x200<strong>&amp;after=</strong>http://placehold.it/400x200</pre>
+
+    	<h3 id="example" class="subheader">Example</h3>
+        <iframe src="{{ example }}?before={{ example }}static/img/iberdrola_fire_2007_before.jpg&amp;after={{ example }}static/img/iberdrola_fire_2007_after.jpg" frameborder="0" width="600" height="400"></iframe>
+
+		<hr />
+	    <h2 id="generate">Generate your own</h2>
+		  <form method="get">
+			<div class="row">
+			  <div class="large-12 columns">
+				<label>Before image
+				  <input placeholder="http://placehold.it/400x200" type="url" name="before">
+				</label>
+			  </div>
+			</div>
+		<div class="row">
+			  <div class="large-12 columns">
+				<label>After image
+				  <input placeholder="http://placehold.it/400x200" type="url" name="after">
+				</label>
+			  </div>
+			</div>
+		<div class="row">
+			  <div class="large-12 columns">
+				<input class="button radius" type="submit" value="Generate visual diff">
+			  </div>
+			</div>
+		  </form>
+	  </div>
+	</div>
+	<footer class="row">
+		<div class="large-12 columns">
+			<hr />
+			<div class="row">
+				<div class="large-6 columns">
+					<ul class="inline-list left">
+						<li>Hosted at <a href="https://www.digitalocean.com/?refcode=ff4228be5069" target="_blank">Digitalocean</a></li>
+						<li>Fork me at <a href="#" target="_blank">Github</a></li>
+					</ul>
+				</div>
+				<div class="large-6 columns">
+					<ul class="inline-list right" style="padding-top: 25px">
+						<li><a href="http://nginx.org/" target="_blank">NGINX</a></li>
+						<li><a href="https://www.djangoproject.com/" target="_blank">Django</a></li>
+						<li><a href="https://jquery.com/" target="_blank">jQuery</a></li>
+						<li><a href="http://foundation.zurb.com/" target="_blank">Foundation</a></li>
+						<li> <a href="http://zurb.com/playground/twentytwenty/" target="_blank">TwentyTwenty</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+{% else %}
+    <div id="container" class="twentytwenty-container">
+        <img src="{{ before }}">
+        <img src="{{ after }}">
+    </div>
+{% endif %}
+    <script src="{% static 'vendor/foundation/js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'vendor/jquery.event.move/js/jquery.event.move.js' %}"></script>
+    <script src="{% static 'vendor/twentytwenty/js/jquery.twentytwenty.js' %}"></script>
+    <script>
+$(window).load(function() {
+    // init diff
+    var container = $("#container").twentytwenty();
+    // get sizes
+    var before = container.find('img:first');
+    var width = before.width(),
+        height = before.height();
+    // center
+    container.css({
+        'width' : width, // center horizontally
+        'margin-top' : height / -2,
+        'margin-left' : width / -2,
+        'top' : '50%',
+        'left' : '50%',
+        'position' : 'absolute'
+    });
+});
+    </script>
+</body>
+</html>

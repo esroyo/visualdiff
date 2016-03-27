@@ -37,7 +37,7 @@ settings.configure(
 )
 
 import base64
-import urllib
+import urllib.request
 from io import BytesIO, StringIO
 from PIL import Image, ImageDraw
 from math import floor
